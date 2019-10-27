@@ -1,0 +1,6 @@
+Oct 27, 2019 6:37:09 AM org.apache.catalina.core.ApplicationContext log
+INFO: Destroying Spring FrameworkServlet 'spring'
+Oct 27, 2019 6:37:10 AM org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextDestroyed()
+Oct 27, 2019 6:37:10 AM org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextDestroyed()
