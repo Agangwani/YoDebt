@@ -77,7 +77,7 @@ public class Mortgage {
 
         // This is the method just for calculating mortgage payments
 
-    public static ArrayList<ArrayList<Float>> showValues(Mortgage mortgage){
+    public static ArrayList<ArrayList<Float>> showValues(Mortgage mortgage, boolean paythroughschool, float amountpay){
         float loanAmount = mortgage.loanAmount;
         float termMonths = mortgage.termmonths;
         float couponValue = mortgage.couponValue;
@@ -89,10 +89,18 @@ public class Mortgage {
         ArrayList<Float> interestPayments = new ArrayList<>();
         ArrayList<Float> principlePayments = new ArrayList<>();
         ArrayList<Float> TotalCashFlow = new ArrayList<>();
+        ArrayList<Float> monthlyPayments = new ArrayList<>();
+
         float newLoanAmt = loanAmount;
         int x = 0;
         while(x <=termMonths) {
+            if(x%12 ==0){
+                monthlyPayments.add((float)monthlyPay);
 
+            }
+            if(paythroughschool== false && x<= 54){
+                monthlyPay = amountpay;
+            }
             Month.add((float)x);
             LoanAfterMonths.add(newLoanAmt);
             float IntPayment = newLoanAmt*couponValue/12;
@@ -101,6 +109,8 @@ public class Mortgage {
             float principle = (float)monthlyPay- IntPayment;
             principlePayments.add(principle);
             int a = 0;
+
+
             while(a < interestPayments.size()){
                 float cashAtMonth = interestPayments.get(a) + principlePayments.get(a);
                 TotalCashFlow.add(cashAtMonth);
@@ -118,6 +128,7 @@ public class Mortgage {
         arr.add(TotalCashFlow);
         arr.add(principlePayments);
         arr.add(interestPayments);
+        arr.add(monthlyPayments);
 
         return arr;
 
@@ -293,6 +304,7 @@ public class Mortgage {
         Mortgage mortgage = new Mortgage(loanAmount, (float)couponValue, termmonths);
         boolean payThroughSchool = false;
         float setSchoolPayments = 0;
+        // or you can have mortgage, boolean, amountpay for a fixed rate Student Loan
         ArrayList<ArrayList<Float>> mortgageValues = showValues(mortgage, underwrite, payThroughSchool, setSchoolPayments);
         ArrayList<Float> months = mortgageValues.get(0);
         ArrayList<Float> updatedLoan = mortgageValues.get(1);
